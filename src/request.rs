@@ -29,23 +29,23 @@ impl<'a> RequestBuilder<'a> {
     }
 
     pub async fn execute(self) -> Result<Response> {
-        let auth = self.client.auth();
+        let account = self.client.account();
         let request = self
             .inner
-            .basic_auth(auth.username(), Some(auth.password()))
+            .basic_auth(account.username(), Some(account.password()))
             .header("Content-Type", "application/json")
             .build()?;
-        println!("request url:      {}", request.url());
-        println!("request headers:  {:?}", request.headers());
-        println!(
-            "request body:     {}",
-            if let Some(body) = request.body() {
-                String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
-            } else {
-                "None".to_string()
-            }
-        );
-        println!("request method:   {}", request.method());
+        // println!("request url:      {}", request.url());
+        // println!("request headers:  {:?}", request.headers());
+        // println!(
+        //     "request body:     {}",
+        //     if let Some(body) = request.body() {
+        //         String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
+        //     } else {
+        //         "None".to_string()
+        //     }
+        // );
+        // println!("request method:   {}", request.method());
         let response = self.client.reqw_client().execute(request).await;
         match response {
             Ok(response) => {
@@ -70,7 +70,7 @@ impl<'a> RequestBuilder<'a> {
     }
 
     fn create_url(client: &Client, path: &str) -> Result<reqwest::Url> {
-        let mut url = match Url::parse(client.base_url()) {
+        let mut url = match Url::parse(client.account().base_url()) {
             Ok(base) => base,
             Err(err) => {
                 return Err(Error::new(

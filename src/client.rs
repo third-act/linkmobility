@@ -1,29 +1,23 @@
-use crate::auth::Auth;
+use crate::account::Account;
 
 pub struct Client {
     reqw_client: reqwest::Client,
-    base_url: String,
-    auth: Auth,
+    account: Account,
 }
 
 impl Client {
-    pub fn new(base_url: impl Into<String>, auth: Auth) -> Self {
+    pub fn new(account: Account) -> Self {
         Self {
-            auth,
+            account,
             reqw_client: reqwest::Client::new(),
-            base_url: base_url.into(),
         }
-    }
-
-    pub fn base_url(&self) -> &str {
-        &self.base_url
     }
 
     pub(crate) fn reqw_client(&self) -> &reqwest::Client {
         &self.reqw_client
     }
 
-    pub(crate) fn auth(&self) -> &Auth {
-        &self.auth
+    pub(crate) fn account(&self) -> &Account {
+        &self.account
     }
 }
