@@ -2,6 +2,9 @@
 name = "linkmobility"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "A library for integrating with linkmobility for sending SMS."
+repository = "https://github.com/third-act/linkmobility/"
 
 [dependencies]
 serde_json = "1.0.94"
