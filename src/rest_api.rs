@@ -29,23 +29,27 @@ pub struct SMS {
     /// message should be sent. The format is depending on
     /// the specified sourceTON.
     pub source: Address,
+
     /// This is the source type of number. See allowed TON
     /// values below.
     /// Default ALPHANUMERIC
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "sourceTON")]
     pub source_ton: Option<ToN>,
+
     /// Required. This is the destination number. The format is
     /// depending on the specified destinationTON.
     /// Remember that MSISDNS include the country code and
     /// a leading plus sign. (+)
     pub destination: Address,
+
     /// This is the destination type of number. See allowed
     /// TON values below.
     /// Default MSISDN.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "destinationTON")]
     pub destination_ton: Option<ToN>,
+
     /// Advanced.
     /// This is the Data Coding Scheme that should be used
     /// when sending the SMS. See allowed DCS values in a
@@ -53,6 +57,7 @@ pub struct SMS {
     ///Default TEXT.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub dcs: Option<DCS>,
+
     /// Advanced.
     /// This value may be specified when sending
     /// concatenated SMS, WAP-push, etc. The format is hex
@@ -64,6 +69,7 @@ pub struct SMS {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "userDataHeader")]
     pub user_data_header: Option<String>,
+
     //// This is the message content itself. The DCS specifies
     /// the format (encoding) on this value.
     /// Note that messages that messages of more than 140
@@ -71,6 +77,7 @@ pub struct SMS {
     /// will do that automatically by default.
     #[serde(rename = "userData")]
     pub user_data: String,
+
     /// True indicates that a delivery report should be sent
     /// back when the message has come to a final state.
     /// (Delivered or failed)
@@ -80,6 +87,7 @@ pub struct SMS {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "useDeliveryReport")]
     pub use_deliver_report: Option<Boolean>,
+
     /// One or more gates that should be used for sending
     /// delivery reports. If you do not specify any Gates to
     /// deliver Delivery Reports to, make sure to set
@@ -89,6 +97,7 @@ pub struct SMS {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "deliveryReportGates")]
     pub deliver_report_gates: Option<Box<[String]>>,
+
     /// This specifies how long the message is supposed to
     /// live. If the message takes longer to deliver to the
     /// handset than the validityTime, the message will be
@@ -98,6 +107,7 @@ pub struct SMS {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "relativeValidityTime")]
     pub relative_validity_time: Option<Long>,
+
     /// The absolute time when a message should expire.
     /// Minimum 15 minutes and maximum 48h in the future.
     /// Formatted according to RFC3339, e.g. 2010-03-30T12:59:40+02:00.
@@ -105,6 +115,7 @@ pub struct SMS {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "absoluteValidityTime")]
     pub absolute_validity_time: Option<Date>,
+
     /// Price, in local currency, in 1/100 of currency. For
     /// example, to send a message costing 5 NOK, this should
     /// be set to 500.
@@ -113,31 +124,38 @@ pub struct SMS {
     /// Default 0.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tariff: Option<Integer>,
+
     /// The currency should be set if the default country
     /// currency not to be used. Supported currencies are
     /// NOK, SEK, DKK, EUR, LTL.
     /// Ignored for non-premium messages
     #[serde(skip_serializing_if = "Option::is_none")]
     pub currency: Option<Currency>,
+
     /// Allowed age for (adult) content.
     /// Optional. Not supported by all operators
     #[serde(skip_serializing_if = "Option::is_none")]
     pub age: Option<Integer>,
+
     /// See the Priority value table, Optional.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub priority: Option<Priority>,
+
     /// Your platformId. Provided to you by Support.
     #[serde(rename = "platformId")]
     pub platform_id: PlatformID,
+
     /// Your platformPartnerId. Provided to you by Support.
     #[serde(rename = "platformPartnerId")]
     pub platform_partner_id: PlatformPartnerID,
+
     /// Your own internal transaction ID. Not used for
     /// anything except as a reference.
     /// Optional.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "refId")]
     pub ref_id: Option<String>,
+
     /// When sending premium messages, a description of the
     /// service. This will be printed on the end-user’s phone
     /// bill.
@@ -145,6 +163,7 @@ pub struct SMS {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "productDescription")]
     pub product_description: Option<String>,
+
     /// When sending premium messages, specify which
     /// category the service is. This lets the operator know
     /// which rates to apply to the message. Support or your
@@ -154,12 +173,14 @@ pub struct SMS {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "productCategory")]
     pub product_category: Option<Integer>,
+
     /// A reference to the ID of the MO message which
     /// triggered the MT message. Required for some
     /// operators.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "moReferenceId")]
     pub mo_reference_id: Option<String>,
+
     /// Advanced. Additional parameters may be specified if
     /// needed.
     /// Support will advise you if you need to use custom
@@ -167,6 +188,7 @@ pub struct SMS {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "customParameters")]
     pub custom_parameters: Option<KeyValue>,
+
     /// Indicates whether you want a response in the body
     /// when you submit the message. This is not a delivery
     /// report, only a confirmation of message submission.

@@ -4,26 +4,36 @@ use std::string::ParseError;
 pub enum ErrorCode {
     /// Invalid authentication. Please check your username and password.
     InvalidAuth,
+
     /// Access denied. Please check your username and password.
     AccessDenied,
+
     /// Unknown Error. Please contact Support and include your whole transaction.
     Unknown,
+
     /// Parse Error. The object to send in the request is badly formatted.
     Parse,
+
     /// Unable to access SMSC credentials.
     SMSCCredentials,
+
     /// Invalid or missing platformId. Please check your platformId.
     InvOrMissingPlatformID,
+
     /// Invalid or missing platformPartnerId. Please check your platformPartnerId.
     InvOrMissingPlatformPartnerID,
+
     /// Invalid or missing currency for premium message. Please check your price
     /// and currency.
     InvOrMissingCurrencyForPremium,
+
     /// No gates available. Please contact Support and include your whole
     /// transaction.
     NoGatesAvail,
+
     /// Specified gate unavailable. Please check your gateId.
     SpecifiedGateUnavail,
+
     /// Linkmobility-unrelated error.
     Other,
 }
